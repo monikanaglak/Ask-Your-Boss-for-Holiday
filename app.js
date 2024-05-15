@@ -30,36 +30,49 @@ const month = document.querySelector(".month");
 const previous = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const monika = document.querySelector(".monika");
-//funkcja ktora za kazdym razem tworzy nowy kalendarz w zaleznosci ile jest dni miesiaca
-//poznac miesiac
-//zobaczyc ile ma dni w danym miesiacy
-//stworzyc kalendarz
+
+function cleaning_calender(){
+  month_dom.innerHTML = " ";
+}
 function creating_calender(current_month){
-    if (thirty_one_days.includes(months[current_month])) {
-        for (let i = 0; i <= 31; i++) {
+  monika.innerHTML = ""
+    if (thirty_one_days.includes(months[current_month])){
+        for (let i = 0; i <= 31; i++){
           let div = document.createElement("div");
           div.classList.add("box");
           div.innerText = i;
           monika.appendChild(div);
-        }
-      } else {
-        let div = document.createElement("div");
-        div.classList.add("box");
-        div.innerText = i;
-        monika.appendChild(div);
+        }}
+        else if(thirty_days.includes(months[current_month])){
+          for(let i = 0; i<=30; i++){
+            let div = document.createElement("div");
+            div.classList.add("box");
+            div.innerText = i;
+            monika.appendChild(div);
+          } 
+        
       }
-}
+    }
+  
 window.onload = (event) => {
+  //zczytanie miesiaca i wstrzykniecie do dom
   month_dom.innerHTML = months[current_month];
   creating_calender(current_month)
-  previous.addEventListener("click", () => {
+  previous.addEventListener("click",()=>{
     current_month++;
     if (current_month >= 12) {
       current_month = 0;
     }
+    let next_month = current_month++;
+
+    month_dom.innerHTML = months[next_month]
+    creating_calender(next_month)
+  })
+  /*previous.addEventListener("click", () => {
+    current_month++;
+    
     month_dom.innerHTML = months[current_month];
-    console.log(months[current_month])
-  });
+  });*/
   next.addEventListener("click", () => {
     current_month--;
     if (current_month < 0) {
